@@ -1,5 +1,6 @@
-select 
+select  distinct
         esend.campaign_name as "Campaign Name"
+        ,esend.UniqueSendID
         ,esend.job_number as "Job Number"        
         ,esend.contactid as "Eloqua Contact ID"
         ,'' as "Segment ID"
@@ -39,9 +40,7 @@ from ( //Creates the main cohort from the t_S_emailsendtable
         join dev_edw.cust360.t_s_contact co on co.contact_id = esend.contactid and co.ROOT_INSTITUTIONAL_DOMAIN1 like '%.%'
         join dev_edw.cust360.t_s_campaign ca on esend.campaignid = ca.eloqua_campaign_id and cast(esend.activitydate as datetime) > dateadd(month,-12, getdate())                                                                                          
                                                                                          and ca.division = 'RC'
-                                                                                                                                                                                                           
-        join dev_edw.cust360.t_s_contact c on esend.contactid = c.contact_id 
-        
+                                                                                                                                                                                                                 
         )esend 
 
 
