@@ -1,4 +1,4 @@
-select  distinct
+select  
         esend.campaign_name as "Campaign Name"
         ,esend.UniqueSendID
         ,esend.job_number as "Job Number"        
